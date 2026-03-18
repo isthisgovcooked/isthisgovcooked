@@ -328,7 +328,7 @@ export default function CookedMetre() {
                   onClick={() => { setPmId(p.pmId); setCompareMode(false); }}
                   className="bg-zinc-950 border border-zinc-800 p-3 text-center hover:border-zinc-600 transition-colors rounded"
                 >
-                  <div className={`font-display text-3xl mb-1 ${getScoreColour(val)}`}>{Math.round(val)}</div>
+                  <div className="font-display text-3xl mb-1" style={{ color: getScoreColour(val) }}>{Math.round(val)}</div>
                   <div className="font-mono text-xs text-zinc-500">{pmDef.id}</div>
                   <div className="font-mono text-[9px] text-zinc-700">{pmDef.party === "Coalition (Liberal)" ? "Coalition" : pmDef.party}</div>
                   <div className="font-mono text-[9px] text-zinc-700 truncate" title={pmDef.term}>{pmDef.term.split("–")[0].trim()}</div>
@@ -337,7 +337,7 @@ export default function CookedMetre() {
             })}
           </div>
         ) : (
-          <Gauge value={displayScore} label={label} labelClassName={getScoreColour(displayScore)} rawScore={rawScore} deceptionAdd={deceptionAdd} confidence={confidence} className="mb-8" />
+          <Gauge value={displayScore} label={label} labelColor={getScoreColour(displayScore)} rawScore={rawScore} deceptionAdd={deceptionAdd} className="mb-8" />
         )}
 
         <MethodologyPanel />

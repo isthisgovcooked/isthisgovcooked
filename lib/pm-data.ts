@@ -240,22 +240,24 @@ function dataToPMScore(id: string, def: PMDefinition, data: PMScoreData): PMScor
 
 /** Cooked Metre label: higher score = more cooked = worse. */
 export function getScoreLabel(score: number): string {
-  if (score <= 25) return "Clean";
-  if (score <= 40) return "A Bit Warm";
-  if (score <= 55) return "Getting Cooked";
-  if (score <= 70) return "Cooked";
-  if (score <= 85) return "Well Cooked";
-  return "Absolutely Cooked";
+  if (score <= 20) return "Squeaky Clean";
+  if (score <= 35) return "A Bit Warm";
+  if (score <= 50) return "Getting Cooked";
+  if (score <= 64) return "Half Cooked";
+  if (score <= 79) return "COOKED";
+  if (score <= 89) return "Well Cooked";
+  return "BURNT TO A CRISP";
 }
 
-/** Tailwind text colour class for score (green = clean, red = cooked). */
+/** Hex colour for score (green = clean, red = cooked). */
 export function getScoreColour(score: number): string {
-  if (score <= 25) return "text-emerald-400";
-  if (score <= 40) return "text-green-400";
-  if (score <= 55) return "text-yellow-400";
-  if (score <= 70) return "text-amber-400";
-  if (score <= 85) return "text-orange-500";
-  return "text-red-500";
+  if (score <= 20) return "#22c55e";   // green-500
+  if (score <= 35) return "#84cc16";   // lime-500
+  if (score <= 50) return "#eab308";   // yellow-500
+  if (score <= 64) return "#f97316";   // orange-500
+  if (score <= 79) return "#ef4444";   // red-500
+  if (score <= 89) return "#dc2626";   // red-600
+  return "#991b1b";                     // red-800
 }
 
 export function computeDeceptionMultiplier(deceptionScore: number): number {
@@ -283,7 +285,7 @@ export const PM_SCORES: Record<string, PMScoreData> = {
     deceptionScore: 38,
     deceptionMultiplier: 1.114,
     finalScore: 39,
-    finalLabel: "A Bit Warm",
+    finalLabel: "Getting Cooked",
     overallGrade: "B",
     contextBanners: [
       { title: "Favourable economic conditions", body: "Howard governed during an exceptional global commodity boom — China's industrialisation drove iron ore and coal prices to record highs, delivering windfall tax revenue. The GFC occurred after his term. His fiscal surpluses reflect both good management AND exceptional tailwinds. The same methodology applied in far more difficult economic conditions would produce different raw scores.", severity: "info" },
@@ -311,7 +313,7 @@ export const PM_SCORES: Record<string, PMScoreData> = {
     deceptionScore: 45,
     deceptionMultiplier: 1.135,
     finalScore: 51,
-    finalLabel: "Getting Cooked",
+    finalLabel: "Half Cooked",
     overallGrade: "C",
     contextBanners: [
       { title: "GFC context — global financial crisis", body: "2008-09 to 2009-10 saw the worst global financial crisis since the Great Depression. Australia's fiscal response (stimulus spending) converted surplus to deficit. Most economists credit the $42B stimulus with preventing recession — Australia and Poland were the only OECD nations to avoid it. The deficit scores for this period reflect necessary crisis response, not mismanagement.", severity: "info" },
@@ -339,7 +341,7 @@ export const PM_SCORES: Record<string, PMScoreData> = {
     deceptionScore: 52,
     deceptionMultiplier: 1.156,
     finalScore: 58,
-    finalLabel: "Getting Cooked",
+    finalLabel: "Half Cooked",
     overallGrade: "C",
     contextBanners: [
       { title: "Minority government context", body: "Gillard governed with a one-seat minority, requiring support from Greens and independents for every piece of legislation. This constrained fiscal options significantly and made governing unusually difficult. The NDIS and carbon price were passed despite this constraint — a significant legislative achievement.", severity: "info" },
@@ -367,7 +369,7 @@ export const PM_SCORES: Record<string, PMScoreData> = {
     deceptionScore: 60,
     deceptionMultiplier: 1.18,
     finalScore: 65,
-    finalLabel: "Cooked",
+    finalLabel: "COOKED",
     overallGrade: "D",
     contextBanners: [
       { title: "Budget emergency — context on the rhetoric", body: "Abbott and Hockey declared a 'budget emergency' to justify 2014 austerity. Treasury's own modelling showed debt was sustainable — the structural deficit was real but not an emergency by international standards. The political framing overplayed the crisis to justify cuts that proved politically undeliverable.", severity: "info" },
@@ -420,7 +422,7 @@ export const PM_SCORES: Record<string, PMScoreData> = {
     deceptionScore: 61,
     deceptionMultiplier: 1.183,
     finalScore: 72,
-    finalLabel: "Cooked",
+    finalLabel: "COOKED",
     overallGrade: "D",
     contextBanners: [
       { title: "COVID-19 context — 2020–2022", body: "Morrison governed through Australia's most significant peacetime crisis. The $107B 2020-21 deficit reflects necessary emergency spending — JobKeeper, JobSeeker expansion, healthcare. Many decisions that look poor in hindsight (RAT availability, hotel quarantine) were made under genuine uncertainty. The Cooked Metre's governance and deception scores reflect documented facts — Robodebt RC findings, the Solicitor-General's opinion on secret ministries — not partisan judgment.", severity: "info" },
@@ -448,7 +450,7 @@ export const PM_SCORES: Record<string, PMScoreData> = {
     deceptionScore: 47,
     deceptionMultiplier: 1.141,
     finalScore: 68,
-    finalLabel: "Cooked",
+    finalLabel: "COOKED",
     overallGrade: "D",
     contextBanners: [
       { title: "Global inflation context — 2022–2023", body: "The inflation surge Albanese inherited (7%+ CPI) was primarily a global phenomenon. The RBA estimates 60-70% of Australia's excess inflation was supply-chain and global energy driven. The domestic fiscal contribution is estimated at 30-40% of excess inflation. Cost-of-living scores reflect this proportional attribution, not full responsibility for global conditions.", severity: "info" },

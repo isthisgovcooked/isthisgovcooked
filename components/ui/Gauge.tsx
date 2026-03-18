@@ -5,16 +5,14 @@ import { motion } from "framer-motion";
 interface GaugeProps {
   /** Final score 0–100 (after deception multiplier) */
   value: number;
-  /** Label e.g. "Cooked", "Well Cooked" */
+  /** Label e.g. "COOKED", "Well Cooked" */
   label: string;
-  /** Optional Tailwind class for label text colour (e.g. text-amber-400) */
-  labelClassName?: string;
+  /** Optional hex colour for label text (e.g. from getScoreColour) */
+  labelColor?: string;
   /** Raw score before deception multiplier */
   rawScore?: number;
   /** Deception add-on e.g. +8 for "adds 8 points" */
   deceptionAdd?: number;
-  /** Source confidence A/B/C — shown as High/Medium/Low */
-  confidence?: "A" | "B" | "C";
   className?: string;
 }
 
@@ -40,19 +38,12 @@ const R = 140;
 const CX = 150;
 const CY = 150;
 
-const CONFIDENCE_LABEL: Record<"A" | "B" | "C", string> = {
-  A: "High",
-  B: "Medium",
-  C: "Low",
-};
-
 export default function Gauge({
   value,
   label,
-  labelClassName,
+  labelColor,
   rawScore,
   deceptionAdd,
-  confidence,
   className = "",
 }: GaugeProps) {
   const clamped = Math.max(0, Math.min(100, value));
@@ -105,24 +96,19 @@ export default function Gauge({
             initial={{ opacity: 0.7, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.25 }}
-            className="font-display text-5xl sm:text-6xl leading-none text-white"
+            className={`font-display text-5xl sm:text-6xl leading-none ${clamped >= 65 ? "text-red-500 drop-shadow-[0_0_20px_rgba(239,68,68,0.8)]" : "text-white"}`}
           >
             {Math.round(clamped)}
           </motion.span>
-          <span className={`font-display text-sm sm:text-base uppercase tracking-widest mt-1 ${labelClassName ?? "text-zinc-400"}`}>
+          <span
+            className="font-display text-sm sm:text-base uppercase tracking-widest mt-1"
+            style={labelColor ? { color: labelColor } : undefined}
+          >
             {label}
           </span>
           {rawScore != null && deceptionAdd != null && (
             <span className="font-mono text-xs text-zinc-500 mt-2">
               Raw: {Math.round(rawScore)} | Deception adds: +{Math.round(deceptionAdd)}
-            </span>
-          )}
-          {confidence && (
-            <span
-              className="font-mono text-xs text-zinc-600 mt-1"
-              title="Source confidence refers to data availability, not the score"
-            >
-              Source confidence: {CONFIDENCE_LABEL[confidence]}
             </span>
           )}
         </div>
