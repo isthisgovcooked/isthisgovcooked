@@ -74,7 +74,7 @@ npm run dev
 
 Runs at `http://localhost:3000`. Production build: `npm run build`.
 
-For the AI chatbot you need an Anthropic API key (user enters in browser; never stored by us). See app and chat component for wiring.
+The AI chatbot is free for all users — powered by Groq (Llama 3.1) via a Cloudflare Worker proxy. No API key required from users. See `worker/chat-proxy.js` for the proxy setup and `components/sections/Chat.tsx` for the frontend.
 
 ---
 
