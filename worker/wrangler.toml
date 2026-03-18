@@ -1,0 +1,14 @@
+name = "govcooked-chat-proxy"
+main = "chat-proxy.js"
+compatibility_date = "2024-01-01"
+
+# KV namespace for rate limiting
+# Create this in Cloudflare dashboard: Workers → KV → Create namespace "RATE_LIMIT_KV"
+# Then paste the ID below
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id      = "PASTE_YOUR_KV_NAMESPACE_ID_HERE"
+
+# Environment variables — set secret via CLI:
+# npx wrangler secret put GROQ_API_KEY
+# (never put the actual key in this file)
