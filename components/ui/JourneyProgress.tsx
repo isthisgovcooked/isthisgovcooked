@@ -9,7 +9,7 @@ const JOURNEY_STEPS = [
   { id: "faircentre",  label: "The Fair Test", emoji: "⚖️" },
   { id: "forward",     label: "What's Coming", emoji: "⚠️" },
   { id: "col",         label: "Your Wallet",   emoji: "💰" },
-  { id: "chat",        label: "Ask Anything",  emoji: "🤖" },
+  // { id: "chat",        label: "Ask Anything",  emoji: "🤖" }, — temporarily hidden
 ];
 
 export default function JourneyProgress() {

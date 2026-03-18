@@ -16,7 +16,7 @@ import RateSensitivity from "@/components/sections/RateSensitivity";
 import BudgetQuiz from "@/components/sections/BudgetQuiz";
 import ColSection from "@/components/sections/Col";
 import PersonalCalc from "@/components/sections/PersonalCalc";
-import ChatSection from "@/components/sections/Chat";
+// import ChatSection from "@/components/sections/Chat";
 import Footer from "@/components/sections/Footer";
 
 export default function Home() {
@@ -87,13 +87,13 @@ export default function Home() {
         <BudgetQuiz />
         <ColSection
           nextSection={{
-            label: "Ask anything",
-            href: "#chat",
-            teaser: "The data is loaded. What do you want to know?",
+            label: "Your impact",
+            href: "#calculator",
+            teaser: "See how budget decisions affect you personally.",
           }}
         />
         <PersonalCalc />
-        <ChatSection />
+        {/* <ChatSection /> — temporarily hidden */}
       </main>
       <ScrollToTop />
       <Footer />

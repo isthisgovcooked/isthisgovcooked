@@ -183,10 +183,8 @@ export default function BudgetCountdown() {
               ))}
             </div>
             <div className="mt-3 font-mono text-xs text-zinc-600">
-              We publish the plain-English verdict within 1 hour of the Treasurer sitting down.{" "}
-              <a href="#chat" className="text-red-500 hover:text-red-300 transition-colors">
-                Ask the AI anything →
-              </a>
+              We publish the plain-English verdict within 1 hour of the Treasurer sitting down.
+              {/* Ask AI link temporarily hidden: <a href="#chat">Ask the AI anything →</a> */}
             </div>
           </div>
         )}

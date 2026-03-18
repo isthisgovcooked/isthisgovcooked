@@ -15,7 +15,7 @@ const NAV_LINKS: { href: string; label: string; accent?: "amber" | "red" }[] = [
   { href: "#rate-sensitivity", label: "Rates" },
   { href: "#quiz",         label: "Quiz" },
   { href: "#col",          label: "Your Wallet" },
-  { href: "#chat",         label: "Ask AI" },
+  // { href: "#chat",         label: "Ask AI" }, — temporarily hidden
   { href: "/about",        label: "About" },
 ];
 
