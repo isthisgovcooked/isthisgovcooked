@@ -1,4 +1,4 @@
-name = "govcooked-chat-proxy"
+name = "isthisgovcooked"
 main = "chat-proxy.js"
 compatibility_date = "2024-01-01"
 
@@ -7,8 +7,10 @@ compatibility_date = "2024-01-01"
 # Then paste the ID below
 [[kv_namespaces]]
 binding = "RATE_LIMIT_KV"
-id      = "PASTE_YOUR_KV_NAMESPACE_ID_HERE"
+id = "6c2b528a5ee3402395b974fd42f11211"
 
 # Environment variables — set secret via CLI:
 # npx wrangler secret put GROQ_API_KEY
 # (never put the actual key in this file)
+
+
