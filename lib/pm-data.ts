@@ -233,18 +233,29 @@ function dataToPMScore(id: string, def: PMDefinition, data: PMScoreData): PMScor
     deceptionMultiplier: data.deceptionMultiplier,
     rawScore: data.rawScore,
     finalScore: data.finalScore,
-    label: data.finalLabel,
+    label: getScoreLabel(data.finalScore),
     grade: data.overallGrade,
   };
 }
 
+/** Cooked Metre label: higher score = more cooked = worse. */
 export function getScoreLabel(score: number): string {
-  if (score <= 20) return "Not Cooked";
+  if (score <= 25) return "Clean";
   if (score <= 40) return "A Bit Warm";
-  if (score <= 60) return "Getting Cooked";
-  if (score <= 75) return "Cooked";
-  if (score <= 90) return "Well Done";
+  if (score <= 55) return "Getting Cooked";
+  if (score <= 70) return "Cooked";
+  if (score <= 85) return "Well Cooked";
   return "Absolutely Cooked";
+}
+
+/** Tailwind text colour class for score (green = clean, red = cooked). */
+export function getScoreColour(score: number): string {
+  if (score <= 25) return "text-emerald-400";
+  if (score <= 40) return "text-green-400";
+  if (score <= 55) return "text-yellow-400";
+  if (score <= 70) return "text-amber-400";
+  if (score <= 85) return "text-orange-500";
+  return "text-red-500";
 }
 
 export function computeDeceptionMultiplier(deceptionScore: number): number {

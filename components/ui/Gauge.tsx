@@ -5,13 +5,15 @@ import { motion } from "framer-motion";
 interface GaugeProps {
   /** Final score 0–100 (after deception multiplier) */
   value: number;
-  /** Label e.g. "Cooked", "Getting Cooked" */
+  /** Label e.g. "Cooked", "Well Cooked" */
   label: string;
+  /** Optional Tailwind class for label text colour (e.g. text-amber-400) */
+  labelClassName?: string;
   /** Raw score before deception multiplier */
   rawScore?: number;
   /** Deception add-on e.g. +8 for "adds 8 points" */
   deceptionAdd?: number;
-  /** Data quality A/B/C */
+  /** Source confidence A/B/C — shown as High/Medium/Low */
   confidence?: "A" | "B" | "C";
   className?: string;
 }
@@ -38,9 +40,16 @@ const R = 140;
 const CX = 150;
 const CY = 150;
 
+const CONFIDENCE_LABEL: Record<"A" | "B" | "C", string> = {
+  A: "High",
+  B: "Medium",
+  C: "Low",
+};
+
 export default function Gauge({
   value,
   label,
+  labelClassName,
   rawScore,
   deceptionAdd,
   confidence,
@@ -100,7 +109,7 @@ export default function Gauge({
           >
             {Math.round(clamped)}
           </motion.span>
-          <span className="font-display text-sm sm:text-base text-zinc-400 uppercase tracking-widest mt-1">
+          <span className={`font-display text-sm sm:text-base uppercase tracking-widest mt-1 ${labelClassName ?? "text-zinc-400"}`}>
             {label}
           </span>
           {rawScore != null && deceptionAdd != null && (
@@ -109,7 +118,12 @@ export default function Gauge({
             </span>
           )}
           {confidence && (
-            <span className="font-mono text-xs text-zinc-600 mt-1">Data quality: {confidence}</span>
+            <span
+              className="font-mono text-xs text-zinc-600 mt-1"
+              title="Source confidence refers to data availability, not the score"
+            >
+              Source confidence: {CONFIDENCE_LABEL[confidence]}
+            </span>
           )}
         </div>
       </div>
