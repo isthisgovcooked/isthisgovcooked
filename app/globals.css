@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-anchor: none;
+    scrollbar-gutter: stable;
+  }
+  body { font-family: var(--font-sans, "IBM Plex Sans", sans-serif); }
+
+  .font-display { font-family: "Bebas Neue", sans-serif !important; }
+}
+
+/* Scrollbar-none utility for horizontal nav */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Section scroll margin and main padding for two-tier nav (~80px) */
+section { scroll-margin-top: 88px; }
+main { padding-top: 80px; }
+
+/* Chat box should handle its own scrolling */
+.chat-scroll-container {
+  overflow-anchor: auto;
+}
+
+/* Scanline overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #3f3f46; }
+::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+/* Scroll-triggered animation keyframes (kept for any legacy use) */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fade-in-right {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}

@@ -1,0 +1,67 @@
+name: GovCooked AI Agent — Weekly Data Update
+
+on:
+  schedule:
+    - cron: '0 23 * * 0'  # Sunday 11pm UTC = Monday 9am AEST
+  workflow_dispatch:       # Manual trigger for testing
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch latest data
+        run: npx tsx scripts/agent/fetch-abs.ts
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Recalculate scores
+        run: npx tsx scripts/agent/score-update.ts
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Check for meaningful changes
+        id: changes
+        run: |
+          git diff --quiet lib/data.ts lib/pm-data.ts || echo "CHANGED=true" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.CHANGED == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "🤖 Weekly data update — $(date +%Y-%m-%d)"
+          branch: agent/weekly-update-${{ github.run_number }}
+          title: "🤖 Weekly Data Update — $(date +%Y-%m-%d)"
+          body: |
+            ## Automated weekly data update
+
+            This PR was created by the GovCooked AI Agent.
+
+            ### What changed
+            See the diff for specific figure changes.
+
+            ### Review checklist
+            - [ ] All source URLs are valid and accessible
+            - [ ] Score changes are in the expected direction given the data
+            - [ ] No anomalous figure changes (>10% from previous)
+            - [ ] Explanations updated if scores changed by >2 points
+
+            **⚠️ DO NOT MERGE WITHOUT HUMAN REVIEW**
+          labels: automated-update
