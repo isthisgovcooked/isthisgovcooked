@@ -2,15 +2,37 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "./providers";
 
+const siteUrl = "https://www.isthisgovcooked.com.au";
+const ogTitle = "Is This Gov Cooked?";
+const ogDescription =
+  "25 years of Australian government finances. 7 PMs scored on the same algorithm. No spin. Just the numbers.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Is This Gov Cooked? | Australian Government Finances Explained",
   description:
     "25 years of Australian government finances (1999–2024) — explained for everyone. No spin. 7 Prime Ministers scored. Budgets, debt, and accounting tricks in plain English.",
   openGraph: {
-    title: "Is This Gov Cooked?",
-    description: "25 years of Australian government finances. 7 PMs scored. No spin. Just the numbers.",
+    title: ogTitle,
+    description: ogDescription,
+    url: siteUrl,
+    siteName: "Is This Gov Cooked?",
     type: "website",
     locale: "en_AU",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: ogTitle,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: ogTitle,
+    description: ogDescription,
+    images: ["/og-image.png"],
   },
   keywords: [
     "Australian budget", "government debt", "federal budget", "ANAO",
