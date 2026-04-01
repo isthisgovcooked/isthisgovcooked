@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     locale: "en_AU",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: ogTitle,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: ogTitle,
     description: ogDescription,
-    images: ["/og-image.png"],
+    images: ["/og-image.webp"],
   },
   keywords: [
     "Australian budget", "government debt", "federal budget", "ANAO",
@@ -69,3 +69,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
